@@ -1,0 +1,8 @@
+name: TNTRun
+version: '${project.version}'
+main: org.gomadango0113.tntrun.TNTRun
+
+commands:
+  tntrun_start:
+    description: ゲームを開始するコマンド
+    permission: tntrun.command.gamestart
