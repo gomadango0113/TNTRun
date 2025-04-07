@@ -1,7 +1,7 @@
 package org.gomadango0113.tntrun.manager;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.gomadango0113.tntrun.TNTRun;
@@ -50,6 +50,22 @@ public class GameManager {
                     }
                     else if (status == GameStatus.RUNNING) {
 
+                        if (tntrun_players.isEmpty()) {
+                            ChatUtil.sendGlobalMessage("ゲーム終了です。");
+                            this.cancel();
+                        }
+
+                        for (Player online : Bukkit.getOnlinePlayers()) {
+                            Location online_loc = online.getLocation();
+                            Location online_under_loc = online_loc.subtract(0, 1, 0);
+                            Block online_under_block = online_under_loc.getBlock();
+                            if (online_under_block.getType() == Material.GOLD_BLOCK) {
+                                tntrun_players.remove(online);
+                                ChatUtil.sendMessage(online, "あなたは脱落しました。");
+                                ChatUtil.sendGlobalMessage(online.getName() + "が脱落しました。" + ChatColor.GRAY + "（残り" + tntrun_players.size() + "人）");
+                                online.setGameMode(GameMode.SPECTATOR);
+                            }
+                        }
                         game_time--;
                     }
                 }
