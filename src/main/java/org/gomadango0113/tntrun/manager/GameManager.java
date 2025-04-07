@@ -49,7 +49,15 @@ public class GameManager {
                         }
                     }
                     else if (status == GameStatus.RUNNING) {
+                        game_time--;
+                    }
+                }
+            }.runTaskTimer(TNTRun.getInstance(), 0L, 20L);
 
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (status == GameStatus.RUNNING) {
                         if (tntrun_players.isEmpty()) {
                             ChatUtil.sendGlobalMessage("ゲーム終了です。");
                             this.cancel();
@@ -65,11 +73,13 @@ public class GameManager {
                                 ChatUtil.sendGlobalMessage(online.getName() + "が脱落しました。" + ChatColor.GRAY + "（残り" + tntrun_players.size() + "人）");
                                 online.setGameMode(GameMode.SPECTATOR);
                             }
+                            else if (online_under_block.getType() == Material.TNT) {
+                                online_under_block.setType(Material.AIR);
+                            }
                         }
-                        game_time--;
                     }
                 }
-            }.runTaskTimer(TNTRun.getInstance(), 0L, 20L);
+            }.runTaskTimer(TNTRun.getInstance(), 0L, 2L);
 
             return 0;
         }
