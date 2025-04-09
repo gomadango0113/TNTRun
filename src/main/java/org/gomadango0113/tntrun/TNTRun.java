@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.gomadango0113.tntrun.command.GameStartCommand;
 import org.gomadango0113.tntrun.listener.PlayerClickListener;
 import org.gomadango0113.tntrun.listener.PlayerJoinListener;
+import org.gomadango0113.tntrun.manager.ScoreboardManager;
 
 public final class TNTRun extends JavaPlugin {
 
@@ -12,6 +13,7 @@ public final class TNTRun extends JavaPlugin {
     public void onEnable() {
         registerCommand();
         registerListener();
+        ScoreboardManager.setScoreboard(0);
 
         getLogger().info("プラグインが有効になりました。");
     }

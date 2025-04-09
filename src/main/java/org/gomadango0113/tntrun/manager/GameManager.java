@@ -7,9 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.gomadango0113.tntrun.TNTRun;
 import org.gomadango0113.tntrun.util.ChatUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class GameManager {
 
@@ -17,6 +15,7 @@ public class GameManager {
     private static int game_time;
 
     private static final Set<OfflinePlayer> tntrun_players = new HashSet<>();
+    private static final Map<OfflinePlayer, Integer> coin_map = new HashMap<>();
 
     static {
         status = GameStatus.WAITING;
@@ -40,7 +39,7 @@ public class GameManager {
                         if (count_time[0] == 0) {
                             ChatUtil.sendGlobalMessage("ゲーム開始!!");
                             tntrun_players.addAll(Bukkit.getOnlinePlayers());
-
+                            ScoreboardManager.setScoreboard(1);
                             status = GameStatus.RUNNING;
                         }
                         else {
@@ -89,6 +88,10 @@ public class GameManager {
 
     public static Set<OfflinePlayer> getRunPlayers() {
         return tntrun_players;
+    }
+
+    public static int getCoin(OfflinePlayer player) {
+        return coin_map.getOrDefault(player, 0);
     }
 
     public static GameStatus getStatus() {
