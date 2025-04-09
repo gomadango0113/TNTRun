@@ -87,11 +87,11 @@ public class GameManager {
         return 1;
     }
 
-    public Set<OfflinePlayer> getRunPlayers() {
+    public static Set<OfflinePlayer> getRunPlayers() {
         return tntrun_players;
     }
 
-    public GameStatus getStatus() {
+    public static GameStatus getStatus() {
         return status;
     }
 
