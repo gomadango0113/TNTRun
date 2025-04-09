@@ -3,6 +3,8 @@ package org.gomadango0113.tntrun;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.gomadango0113.tntrun.command.GameStartCommand;
+import org.gomadango0113.tntrun.listener.PlayerClickListener;
+import org.gomadango0113.tntrun.listener.PlayerJoinListener;
 
 public final class TNTRun extends JavaPlugin {
 
@@ -25,6 +27,9 @@ public final class TNTRun extends JavaPlugin {
 
     public void registerListener() {
         PluginManager plm = getServer().getPluginManager();
+
+        plm.registerEvents(new PlayerClickListener(), this);
+        plm.registerEvents(new PlayerJoinListener(), this);
     }
 
     public static TNTRun getInstance() {
